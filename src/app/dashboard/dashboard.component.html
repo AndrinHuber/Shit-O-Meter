@@ -1,0 +1,28 @@
+<div id="body">
+  <button id="buttonTop" mat-raised-button color="basic" routerLink="/statistics">Statistic</button>
+  <h2>Musst du auf Klo?</h2>
+  <h2>Stoppe die Zeit und bewerte deine Erfahrung!</h2>
+  <h1> Uhrzeit: {{filteredDate}}</h1>
+  <h2 >{{startTimetext}}</h2>
+  <div>
+    <button [disabled]="isSaved" mat-raised-button color="primary" (click)="start()">Start</button>
+    <button [disabled]="!isRunning" mat-raised-button color="warn" (click)="stop()">Stop</button>
+  </div>
+  <br><br><br>
+  <h3 *ngIf="isStopped">Wie war dein Erlebniss?</h3>
+  <mat-slider
+    *ngIf="isStopped"
+    thumbLabel
+    tickInterval="1000"
+    step="1"
+    min="0"
+    max="10"
+    aria-label="units"
+    [(ngModel)]="Slider"></mat-slider>
+  <h3 *ngIf="isStopped">Welche Art?</h3>
+  <section class="example-section" *ngIf="isStopped">
+    <mat-checkbox class="example-margin" (change)="checkbox = !checkbox" [disabled]="checkbox2">Gross: 💩</mat-checkbox>
+    <mat-checkbox class="example-margin" (change)="checkbox2 = !checkbox2" [disabled]="checkbox">Klein: 🌊</mat-checkbox>
+  </section>
+  <button id="savebutton" [disabled]="isRunning || !isSaved || !checkbox && !checkbox2 || !Slider" *ngIf="isStopped" mat-raised-button color="accent" (click)="save();">Speichern</button>
+</div>
