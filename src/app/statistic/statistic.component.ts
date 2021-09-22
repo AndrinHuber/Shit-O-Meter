@@ -42,6 +42,10 @@ export class StatisticComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.init()
+  }
+
+  init(){
     this.data.shift();
     this.dataArt.shift();
     var stuhlgaenge: any = [];
@@ -58,7 +62,7 @@ export class StatisticComponent implements OnInit {
         }
       }
       this.data.push({name: "Bewertung",series: stuhlgaenge});
-      this.validationAverage = this.validationAverage / this.entries.length;
+      this.validationAverage = Math.round(this.validationAverage / this.entries.length * 10) / 10;
     }
   }
 
