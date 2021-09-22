@@ -12,13 +12,54 @@ import {Router} from "@angular/router";
 })
 export class StatisticComponent implements OnInit {
   entries: Entry[] = this.entryService.getAll();
+  data = [
+    {
+      name: "Bewertung",
+      series: [
+        {
+          value: 0,
+          name: "",
+        }
+      ]
+    }
+  ];
+  small: number = 0;
+  big: number = 0;
+  dataArt = [
+    {
+      "name": "",
+      "value": 0
+    }
+
+  ];
+  view: [number, number] = [700, 300];
+  viewArt: [number, number] = [400, 300];
+  validationAverage: number = 0;
 
   constructor(public entryService: EntryService,
               private _snackBar: MatSnackBar,
-              private router: Router) { }
+              private router: Router) {
+  }
 
   ngOnInit(): void {
-    console.log(this.entries);
+    this.data.shift();
+    this.dataArt.shift();
+    var stuhlgaenge: any = [];
+    if(this.entries){
+      for (let i = 0; i < this.entries.length; i++) {
+        this.validationAverage = this.validationAverage + this.entries[i].valuation;
+        stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date,});
+        if(this.entries[i].bigOrSmall == 1){
+          this.small = this.small + 1;
+          this.dataArt.push({name: '🌊', value: this.small,});
+        }else{
+          this.big = this.big + 1;
+          this.dataArt.push({name: '💩', value: this.big,});
+        }
+      }
+      this.data.push({name: "Bewertung",series: stuhlgaenge});
+      this.validationAverage = this.validationAverage / this.entries.length;
+    }
   }
 
   openSnackBar(message: string, action: string) {
@@ -44,4 +85,15 @@ export class StatisticComponent implements OnInit {
     this.router.navigate(['/dashboard']);
   }
 
+  onSelect(data: any): void {
+    console.log('Item clicked', JSON.parse(JSON.stringify(data)));
+  }
+
+  onActivate(data: any): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data: any): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
 }

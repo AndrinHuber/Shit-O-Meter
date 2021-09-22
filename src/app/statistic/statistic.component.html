@@ -1,5 +1,7 @@
 <div id="body">
   <button id="buttonTop" mat-raised-button color="basic" routerLink="/dashboard">Dashboard</button>
+  <h1 class="tableLength" *ngIf="entries">{{entries.length}} Stuhlgänge</h1>
+  <h1 class="tableLength" *ngIf="!entries">0 Stuhlgänge</h1>
   <table id="table">
     <thead>
     <tr>
@@ -20,4 +22,39 @@
     </div>
   </table>
   <button *ngIf="entries" mat-raised-button color="warn" (click)="deleteTable()">Daten löschen</button>
+  <div class="charts">
+    <h2>Deine Bewertungen</h2>
+    <ngx-charts-line-chart
+      style="margin: 20px;"
+      [view]="view"
+      [results]="data"
+      [xAxisLabel]="'Schisse'"
+      [yAxisLabel]="'Bewertung'"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [gradient]="true">
+    </ngx-charts-line-chart>
+    <h3>Durchschnitt: {{validationAverage}} / 10</h3>
+  </div>
+  <div class="charts">
+    <h2>Deine Arten von WC-Gängen</h2>
+    <ngx-charts-bar-vertical
+      [view]="viewArt"
+      [scheme]="'horizon'"
+      [results]="dataArt"
+      [gradient]="false"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Art'"
+      [yAxisLabel]="'Anzahl'"
+      (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </div>
+  <br><br><br>
 </div>

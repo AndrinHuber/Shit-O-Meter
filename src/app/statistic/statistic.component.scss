@@ -2,6 +2,10 @@ table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
   width: 50%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.tableLength{
+  margin-top: 100px;
 }
 button{
   margin: 10px;
@@ -16,8 +20,6 @@ td{
 thead, th{
   background-color: #dddddd;
   border: 1px solid black;
-  position: sticky;
-  top: 0;
   padding: 8px;
 }
 
@@ -25,7 +27,7 @@ thead, th{
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   font-size: 20px;
   margin-top: 40px;
   width: 50%;
@@ -38,12 +40,21 @@ thead, th{
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   overflow: auto;
 }
 #buttonTop{
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 10px;
+}
+.charts{
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-top: 100px;
 }

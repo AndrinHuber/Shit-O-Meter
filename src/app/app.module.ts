@@ -15,6 +15,7 @@ import {MatTableModule} from "@angular/material/table";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatIconModule} from "@angular/material/icon";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {BarChartModule, LineChartModule} from "@swimlane/ngx-charts";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,9 @@ import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
     MatTableModule,
     MatProgressSpinnerModule,
     MatIconModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    LineChartModule,
+    BarChartModule
   ],
   providers: [],
   bootstrap: [AppComponent]
