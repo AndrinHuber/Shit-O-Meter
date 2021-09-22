@@ -52,7 +52,7 @@ export class StatisticComponent implements OnInit {
     if(this.entries){
       for (let i = 0; i < this.entries.length; i++) {
         this.validationAverage = this.validationAverage + this.entries[i].valuation;
-        stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date,});
+        stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date});
         if(this.entries[i].bigOrSmall == 1){
           this.small = this.small + 1;
           this.dataArt.push({name: '🌊', value: this.small,});

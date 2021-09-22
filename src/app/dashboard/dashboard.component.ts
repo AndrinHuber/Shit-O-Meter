@@ -88,7 +88,7 @@ export class DashboardComponent implements OnInit {
       entry.bigOrSmall = State.small;
     }
     const datepipe: DatePipe = new DatePipe('en-US')
-    let formattedDate = datepipe.transform(Date().toLocaleString(), 'dd-MM-YYYY HH:mm:ss')
+    let formattedDate = datepipe.transform(Date().toLocaleString(), 'dd.MM.YYYY HH:mm:ss')
     entry.date = formattedDate;
     this.checkbox = false;
     this.checkbox2 = false;
