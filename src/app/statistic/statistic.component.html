@@ -15,7 +15,7 @@
       <td><span>{{entrys.date}}</span></td>
       <td><span>{{entrys.time}}</span></td>
       <td><span>{{entrys.valuation}}</span></td>
-      <td><span *ngIf="entrys.bigOrSmall == 1">Klein</span><span *ngIf="entrys.bigOrSmall == 0">Gross</span></td>
+      <td><span *ngIf="entrys.bigOrSmall == 1">🌊</span><span *ngIf="entrys.bigOrSmall == 0">💩</span></td>
     </tr>
     <div *ngIf="!entries" id="noData">
       <mat-spinner [diameter]="30" color="warn"></mat-spinner>&nbsp; Keine Scheiss-Daten vorhanden :(
@@ -40,11 +40,31 @@
     <h3>Durchschnitt: {{validationAverage}} / 10</h3>
   </div>
   <div class="charts">
+    <h2>Deine Längen</h2>
+    <ngx-charts-bar-horizontal
+      style="margin: 20px;"
+      [view]="viewDuration"
+      [scheme]="'ocean'"
+      [results]="dataDuration"
+      [gradient]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [legend]="false"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxisLabel]="'Länge in Minuten'"
+      [yAxisLabel]="'Stuhlgänge'"
+      (select)="onSelect($event)"
+      (activate)="onActivate($event)"
+      (deactivate)="onDeactivate($event)">
+    </ngx-charts-bar-horizontal>
+  </div>
+  <div class="charts">
     <h2>Deine Arten von WC-Gängen</h2>
     <div id="vertical">
       <ngx-charts-bar-vertical
         [view]="viewArt"
-        [scheme]="'horizon'"
+        [scheme]="'cool'"
         [results]="dataArt"
         [gradient]="true"
         [xAxis]="true"
@@ -58,7 +78,7 @@
       </ngx-charts-bar-vertical>
       <ngx-charts-pie-chart
         [view]="viewArt"
-        [scheme]="'horizon'"
+        [scheme]="'cool'"
         [results]="dataArtRound"
         [gradient]="true"
         [legend]="false"

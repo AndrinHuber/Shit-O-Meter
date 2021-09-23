@@ -4,6 +4,7 @@ import {EntryService} from "../Services/entry.service";
 import {Entry} from "../Models/Entry";
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-statistic',
@@ -37,10 +38,16 @@ export class StatisticComponent implements OnInit {
       "name": "",
       "value": 0
     }
-
+  ];
+  dataDuration = [
+    {
+      name: "",
+      value: 0,
+    }
   ];
   view: [number, number] = [700, 300];
   viewArt: [number, number] = [365, 300];
+  viewDuration: [number, number] = [700, 300];
   validationAverage: number = 0;
 
   constructor(public entryService: EntryService,
@@ -56,11 +63,22 @@ export class StatisticComponent implements OnInit {
     this.data.shift();
     this.dataArt.shift();
     this.dataArtRound.shift();
+    this.dataDuration.shift();
     var stuhlgaenge: any = [];
     if(this.entries){
       for (let i = 0; i < this.entries.length; i++) {
         this.validationAverage = this.validationAverage + this.entries[i].valuation;
         stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date});
+        let timeSplitted = this.entries[i].time.split(":", 3)
+        let timeDate = new Date();
+        timeDate.setHours(Number(timeSplitted[0].valueOf()))
+        timeDate.setMinutes(Number(timeSplitted[1].valueOf()))
+        timeDate.setSeconds(Number(timeSplitted[2].valueOf()))
+        var seconds = (timeDate.getSeconds() / 6) / 10;
+        var timeinMinutes = timeDate.getMinutes() + seconds;
+        var entryDates: any = [];
+        entryDates.push(this.entries[i].date);
+        this.dataDuration.push({name: entryDates,  value: timeinMinutes,});
         if(this.entries[i].bigOrSmall == 1){
           this.small = this.small + 1;
           this.dataArt.push({name: '🌊', value: this.small,});
