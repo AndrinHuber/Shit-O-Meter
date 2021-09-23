@@ -1,12 +1,14 @@
-<div id="body">
+<div id="body" style="background-image: url('assets/pictures/shitRound.png');">
   <button id="buttonTop" mat-raised-button color="basic" routerLink="/statistics">Statistics</button>
-  <h2>Musst du auf Klo?</h2>
-  <h2>Stoppe die Zeit und bewerte deinen Stuhlgang!</h2>
-  <h1> Uhrzeit: {{filteredDate}}</h1>
-  <h2 >{{startTimetext}}</h2>
-  <div>
-    <button [disabled]="isSaved" mat-raised-button color="primary" (click)="start()">Start</button>
-    <button [disabled]="!isRunning" mat-raised-button color="warn" (click)="stop()">Stop</button>
+  <div id="timer">
+    <h2>Musst du auf Klo?</h2>
+    <h2>Stoppe die Zeit und bewerte deinen Stuhlgang!</h2>
+    <h1> Uhrzeit: {{filteredDate}}</h1>
+    <h2 >{{startTimetext}}</h2>
+    <div>
+      <button [disabled]="isSaved" mat-raised-button color="primary" (click)="start()">Start</button>
+      <button [disabled]="!isRunning" mat-raised-button color="warn" (click)="stop()">Stop</button>
+    </div>
   </div>
   <div id="valuation" *ngIf="isStopped">
     <h3>Wie war dein Erlebniss?</h3>
