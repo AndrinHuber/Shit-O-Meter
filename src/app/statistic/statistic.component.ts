@@ -32,8 +32,15 @@ export class StatisticComponent implements OnInit {
     }
 
   ];
+  dataArtRound = [
+    {
+      "name": "",
+      "value": 0
+    }
+
+  ];
   view: [number, number] = [700, 300];
-  viewArt: [number, number] = [400, 300];
+  viewArt: [number, number] = [365, 300];
   validationAverage: number = 0;
 
   constructor(public entryService: EntryService,
@@ -48,6 +55,7 @@ export class StatisticComponent implements OnInit {
   init(){
     this.data.shift();
     this.dataArt.shift();
+    this.dataArtRound.shift();
     var stuhlgaenge: any = [];
     if(this.entries){
       for (let i = 0; i < this.entries.length; i++) {
@@ -61,6 +69,8 @@ export class StatisticComponent implements OnInit {
           this.dataArt.push({name: '💩', value: this.big,});
         }
       }
+      this.dataArtRound.push({name: '💩', value: this.big,});
+      this.dataArtRound.push({name: '🌊', value: this.small,});
       this.data.push({name: "Bewertung",series: stuhlgaenge});
       this.validationAverage = Math.round(this.validationAverage / this.entries.length * 10) / 10;
     }

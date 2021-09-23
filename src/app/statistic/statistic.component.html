@@ -41,20 +41,34 @@
   </div>
   <div class="charts">
     <h2>Deine Arten von WC-Gängen</h2>
-    <ngx-charts-bar-vertical
-      [view]="viewArt"
-      [scheme]="'horizon'"
-      [results]="dataArt"
-      [gradient]="false"
-      [xAxis]="true"
-      [yAxis]="true"
-      [legend]="false"
-      [showXAxisLabel]="true"
-      [showYAxisLabel]="true"
-      [xAxisLabel]="'Art'"
-      [yAxisLabel]="'Anzahl'"
-      (select)="onSelect($event)">
-    </ngx-charts-bar-vertical>
+    <div id="vertical">
+      <ngx-charts-bar-vertical
+        [view]="viewArt"
+        [scheme]="'horizon'"
+        [results]="dataArt"
+        [gradient]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+        [legend]="false"
+        [showXAxisLabel]="true"
+        [showYAxisLabel]="true"
+        [xAxisLabel]="'Art'"
+        [yAxisLabel]="'Anzahl'"
+        (select)="onSelect($event)">
+      </ngx-charts-bar-vertical>
+      <ngx-charts-pie-chart
+        [view]="viewArt"
+        [scheme]="'horizon'"
+        [results]="dataArtRound"
+        [gradient]="true"
+        [legend]="false"
+        [labels]="true"
+        [doughnut]="true"
+        (select)="onSelect($event)"
+        (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
+      </ngx-charts-pie-chart>
+    </div>
   </div>
   <br><br><br>
 </div>
