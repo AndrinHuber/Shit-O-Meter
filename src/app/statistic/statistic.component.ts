@@ -49,6 +49,8 @@ export class StatisticComponent implements OnInit {
   viewArt: [number, number] = [365, 300];
   viewDuration: [number, number] = [700, 300];
   validationAverage: number = 0;
+  timeAverage: number = 0;
+  timeUnits:[string, string, string] = ['Sekunden', 'Minuten', 'Stunden'];
 
   constructor(public entryService: EntryService,
               private _snackBar: MatSnackBar,
@@ -79,6 +81,7 @@ export class StatisticComponent implements OnInit {
         var entryDates: any = [];
         entryDates.push(this.entries[i].date);
         this.dataDuration.push({name: entryDates,  value: timeinMinutes,});
+        this.timeAverage = this.timeAverage + timeinMinutes;
         if(this.entries[i].bigOrSmall == 1){
           this.small = this.small + 1;
           this.dataArt.push({name: '🌊', value: this.small,});
@@ -91,6 +94,7 @@ export class StatisticComponent implements OnInit {
       this.dataArtRound.push({name: '🌊', value: this.small,});
       this.data.push({name: "Bewertung",series: stuhlgaenge});
       this.validationAverage = Math.round(this.validationAverage / this.entries.length * 10) / 10;
+      this.timeAverage = Math.round(this.timeAverage / this.entries.length * 100) / 100;
     }
   }
 
