@@ -38,14 +38,6 @@
       [gradient]="true">
     </ngx-charts-line-chart>
     <h3>Durchschnitt: {{validationAverage}} / 10</h3>
-    <mat-form-field appearance="fill">
-      <mat-label>Zeiteinheit</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let unit of timeUnits" [value]="timeUnits">
-          {{unit}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
   </div>
   <div class="charts">
     <h2>Deine Längen</h2>
@@ -60,13 +52,23 @@
       [legend]="false"
       [showXAxisLabel]="true"
       [showYAxisLabel]="true"
-      [xAxisLabel]="'Länge in Minuten'"
+      [xAxisLabel]="'Zeit in '+selectedValue"
       [yAxisLabel]="'Stuhlgänge'"
       (select)="onSelect($event)"
       (activate)="onActivate($event)"
       (deactivate)="onDeactivate($event)">
     </ngx-charts-bar-horizontal>
-    <h3>Durchschnitt: {{timeAverage}} Minuten</h3>
+    <form>
+      <mat-form-field appearance="fill">
+        <mat-label>Zeiteinheit</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="Units">
+          <mat-option *ngFor="let units of timeUnits" [value]="units.value">
+            {{units.value}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </form>
+    <h3>Durchschnitt: {{timeAverage}} {{selectedValue}}</h3>
   </div>
   <div class="charts">
     <h2>Deine Arten von WC-Gängen</h2>

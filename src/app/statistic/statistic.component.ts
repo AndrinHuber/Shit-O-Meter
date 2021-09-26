@@ -6,6 +6,11 @@ import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {Router} from "@angular/router";
 import {DatePipe} from "@angular/common";
 
+
+interface timeUnits {
+  value: string;
+}
+
 @Component({
   selector: 'app-statistic',
   templateUrl: './statistic.component.html',
@@ -50,7 +55,12 @@ export class StatisticComponent implements OnInit {
   viewDuration: [number, number] = [700, 300];
   validationAverage: number = 0;
   timeAverage: number = 0;
-  timeUnits:[string, string, string] = ['Sekunden', 'Minuten', 'Stunden'];
+  selectedValue: string = 'Minuten';
+timeUnits = [] = [
+    {value: 'Sekunden'},
+    {value: 'Minuten'},
+    {value: 'Stunden'}
+  ];
 
   constructor(public entryService: EntryService,
               private _snackBar: MatSnackBar,
