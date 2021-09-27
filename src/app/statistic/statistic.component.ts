@@ -54,6 +54,9 @@ export class StatisticComponent implements OnInit {
   viewArt: [number, number] = [365, 300];
   viewDuration: [number, number] = [700, 300];
   validationAverage: number = 0;
+  timeAverageSeconds: number = 0;
+  timeAverageMinutes: number = 0;
+  timeAverageHours: number = 0;
   timeAverage: number = 0;
   selectedValue: string = 'Minuten';
 timeUnits = [] = [
@@ -78,9 +81,12 @@ timeUnits = [] = [
     this.dataDuration.shift();
     var stuhlgaenge: any = [];
     if(this.entries){
+      this.timeAverage = 0;
+      this.timeAverageSeconds = 0;
+      this.timeAverageMinutes = 0;
+      this.timeAverageHours = 0;
       for (let i = 0; i < this.entries.length; i++) {
         this.validationAverage = this.validationAverage + this.entries[i].valuation;
-        stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date});
         let timeSplitted = this.entries[i].time.split(":", 3)
         let timeDate = new Date();
         timeDate.setHours(Number(timeSplitted[0].valueOf()))
@@ -88,10 +94,27 @@ timeUnits = [] = [
         timeDate.setSeconds(Number(timeSplitted[2].valueOf()))
         var seconds = (timeDate.getSeconds() / 6) / 10;
         var timeinMinutes = timeDate.getMinutes() + seconds;
+        var timeinSeconds = (timeinMinutes * 60);
+        var timeinHours = (timeinMinutes / 60);
         var entryDates: any = [];
         entryDates.push(this.entries[i].date);
-        this.dataDuration.push({name: entryDates,  value: timeinMinutes,});
-        this.timeAverage = this.timeAverage + timeinMinutes;
+
+        if(this.selectedValue == 'Sekunden'){
+          this.dataDuration.push({name: entryDates,  value: timeinSeconds,});
+          this.timeAverageSeconds = this.timeAverageSeconds + timeinSeconds;
+          this.timeAverage = this.timeAverageSeconds;
+        }
+        if(this.selectedValue == 'Minuten'){
+          this.dataDuration.push({name: entryDates,  value: timeinMinutes,});
+          this.timeAverageMinutes = this.timeAverageMinutes + timeinMinutes;
+          this.timeAverage = this.timeAverageMinutes;
+        }
+        if(this.selectedValue == 'Stunden'){
+          this.dataDuration.push({name: entryDates,  value: timeinHours,});
+          this.timeAverageHours = this.timeAverageHours + timeinHours;
+          this.timeAverage = this.timeAverageHours;
+        }
+        stuhlgaenge.push({value: this.entries[i].valuation, name: this.entries[i].date});
         if(this.entries[i].bigOrSmall == 1){
           this.small = this.small + 1;
           this.dataArt.push({name: '🌊', value: this.small,});
@@ -104,8 +127,14 @@ timeUnits = [] = [
       this.dataArtRound.push({name: '🌊', value: this.small,});
       this.data.push({name: "Bewertung",series: stuhlgaenge});
       this.validationAverage = Math.round(this.validationAverage / this.entries.length * 10) / 10;
-      this.timeAverage = Math.round(this.timeAverage / this.entries.length * 100) / 100;
+      this.timeAverage = Math.round(this.timeAverage / this.entries.length * 1000) / 1000;
     }
+  }
+
+  refreshData(){
+    this.dataDuration.length = 0;
+    this.dataDuration = [...this.dataDuration]
+    this.init()
   }
 
   openSnackBar(message: string, action: string) {

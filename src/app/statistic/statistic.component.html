@@ -44,7 +44,7 @@
     <ngx-charts-bar-horizontal
       style="margin: 20px;"
       [view]="viewDuration"
-      [scheme]="'ocean'"
+      [scheme]="'vivid'"
       [results]="dataDuration"
       [gradient]="true"
       [xAxis]="true"
@@ -59,9 +59,9 @@
       (deactivate)="onDeactivate($event)">
     </ngx-charts-bar-horizontal>
     <form>
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" >
         <mat-label>Zeiteinheit</mat-label>
-        <mat-select [(ngModel)]="selectedValue" name="Units">
+        <mat-select [(ngModel)]="selectedValue" name="Units" (ngModelChange)="refreshData()">
           <mat-option *ngFor="let units of timeUnits" [value]="units.value">
             {{units.value}}
           </mat-option>
