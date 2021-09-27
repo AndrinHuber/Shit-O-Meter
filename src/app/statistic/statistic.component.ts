@@ -59,6 +59,7 @@ export class StatisticComponent implements OnInit {
   timeAverageHours: number = 0;
   timeAverage: number = 0;
   selectedValue: string = 'Minuten';
+  favoriteWay: String = '';
 timeUnits = [] = [
     {value: 'Sekunden'},
     {value: 'Minuten'},
@@ -98,7 +99,6 @@ timeUnits = [] = [
         var timeinHours = (timeinMinutes / 60);
         var entryDates: any = [];
         entryDates.push(this.entries[i].date);
-
         if(this.selectedValue == 'Sekunden'){
           this.dataDuration.push({name: entryDates,  value: timeinSeconds,});
           this.timeAverageSeconds = this.timeAverageSeconds + timeinSeconds;
@@ -121,6 +121,15 @@ timeUnits = [] = [
         }else{
           this.big = this.big + 1;
           this.dataArt.push({name: '💩', value: this.big,});
+        }
+      }
+      if(this.small == this.big){
+        this.favoriteWay = '💩 & 🌊';
+      }else{
+        if(this.small > this.big){
+          this.favoriteWay = '🌊';
+        }else{
+          this.favoriteWay = '💩';
         }
       }
       this.dataArtRound.push({name: '💩', value: this.big,});
