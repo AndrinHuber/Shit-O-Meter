@@ -18,7 +18,7 @@
       <td><span *ngIf="entrys.bigOrSmall == 1">🌊</span><span *ngIf="entrys.bigOrSmall == 0">💩</span></td>
     </tr>
     <div *ngIf="!entries" id="noData">
-      <mat-spinner [diameter]="30" color="warn"></mat-spinner>&nbsp; Keine Scheiss-Daten vorhanden :(
+      <mat-spinner [diameter]="30" ></mat-spinner>&nbsp; Keine Scheiss-Daten vorhanden :(
     </div>
   </table>
   <button *ngIf="entries" mat-raised-button color="warn" (click)="deleteTable()">Daten löschen</button>
